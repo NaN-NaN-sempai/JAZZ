@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin:0;
+            font-family: sans-serif;    
+        }
+    </style>
+</head>
+<body>
+    <p>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Expedita harum enim esse ipsum dolore fugiat cumque. Asperiores itaque fugit incidunt eius numquam neque. Tempora soluta hic omnis vitae velit doloribus!
+    </p>
+    <p>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Expedita harum enim esse ipsum dolore fugiat cumque. Asperiores itaque fugit incidunt eius numquam neque. Tempora soluta hic omnis vitae velit doloribus!
+    </p>
+    <p>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Expedita harum enim esse ipsum dolore fugiat cumque. Asperiores itaque fugit incidunt eius numquam neque. Tempora soluta hic omnis vitae velit doloribus!
+    </p>
+</body>
+
+<script src="./script/jazz/index.js"></script>
+
+<script>
+    el = document.querySelector("#test");
+    
+    t = new JAZZ(document.querySelectorAll("p"), `
+        background: red;
+        color: white;
+        transition: .5s;
+        border: 0px solid white; 
+        &:hover -[
+            background: blue;
+        ]-
+    `)
+
+    r = t.statefullStyle("border: 20px solid green;");
+    r.toggle();
+
+    [...document.querySelectorAll("p")].forEach((e,i)=>{
+
+        new JAZZ(e, `
+            border-radius: ${30 * i}px;
+        `)
+
+        e.addEventListener("click", ()=>r.toggle())
+    });
+</script>
+</html>

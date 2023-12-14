@@ -1,0 +1,33 @@
+/*
+
+    language must be reactive?
+
+*/
+
+// use case A, js inside css events
+
+.hoverBox:hover {
+    //js # do something when hovering
+    js: {
+        console.log("hovering");
+    };
+
+
+    //css
+    background: red;
+}
+
+// use case B, dynamic css generation
+
+const randomColor = () => ...returns random hex
+
+sel = document.querySelector(".mySelector");
+
+for(i in sel.children) {
+
+    console.log(i, sel.children[i])
+
+    DOMSel{sel.children[i]} {
+        background: js{randomColor()};
+    }
+}
