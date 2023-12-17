@@ -12,8 +12,6 @@ class JazzCssLexer {
     }
 
     getNextToken() {
-        const jazzKeywords = ['set', 'clog', 'this'];
-
         const hexColor = /#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})/;
         const rgbColor = /rgba?\(\s*\d+\s*,\s*\d+\s*,\s*\d+(\s*,\s*\d+(\.\d+)?)?\s*\)/;
         const hslColor = /hsla?\(\s*\d+(\.\d+)?\s*,\s*\d+(\.\d+)?%\s*,\s*\d+(\.\d+)?%\s*(,\s*\d+(\.\d+)?)?\s*\)/;
@@ -30,7 +28,7 @@ class JazzCssLexer {
             
             //{ type: 'EVENT', regex: new RegExp(`:\\b(${events.join('|')})\\b`) },
             
-            { type: 'SELECTOR', regex: /\s*([^\{\}]+(?=\s*\{))\s*/ },
+            { type: 'SELECTOR', regex: /\s*([^\{\};]*[^\{\};:\s])\s*(?=\{)/ },
 
             { type: 'PROPERTY', regex: /[a-zA-Z-]+(?=\s*:)/ },
             { type: 'VALUE', regex: /[^;]+/ },
@@ -62,7 +60,7 @@ class JazzCssLexer {
                     this.input = this.input.trimLeft();
                 }
 
-                this.tokens.push({ type, value });
+                this.tokens.push({ type, value, index: this.tokens.length });
                 return { type, value };
             }
         }
@@ -92,6 +90,8 @@ class JazzCssParser {
         
         while (this.currentIndex < this.tokens.length) {
             const statement = this.parseStatement();
+            
+
             if (statement) {
                 statements.push(statement);
             }
@@ -101,27 +101,37 @@ class JazzCssParser {
     }
 
     parseStatement() {
-        const token = this.tokens[this.currentIndex];
+        let token = this.tokens[this.currentIndex];  
+
+        console.log("\n");
+        console.log("BEGIN PARSE STATEMENT: ", token);
         
         if (token.type === 'SELECTOR') {
-            let returnObj = {};
-
-            const selector = this.parseSelector();
-            const events = this.parseEvents();
-            const block = this.parseBlock(returnObj);
-            
-            returnObj = {
-                selector,
-                events,
-                ...returnObj,
-                block,
+            let returnObj = {
+                selector: this.parseSelector().trimStart().trimEnd(),
+                jazz: []
             };
+
             
+            //const events = this.parseEvents();
+            
+            let block = this.parseBlock(returnObj);
+
+            returnObj.properties = block.properties;
+            returnObj.nested = block.nested;
+            console.log(this.currentIndex);
+/* 
+            console.log("end: ",this.tokens[this.currentIndex], " of ", token);
+            console.log("\n");   */
+            
+            console.log("\n");
+            console.log("END PARSE STATEMENT: ", this.tokens[this.currentIndex], " of ", token.value);
             return returnObj;
         }
 
         // Avança para o próximo token se não for uma declaração válida
         this.currentIndex++;
+        
         return null;
     }
 
@@ -152,49 +162,73 @@ class JazzCssParser {
         return eventsList;
     }
 
-    parseBlock(obj) {
-        const block = {};
+    parseBlock(root) {
+        const block = {
+            nested: []
+        };
         while (this.currentIndex < this.tokens.length) {
             const token = this.tokens[this.currentIndex];
 
+
             if (token.type === 'BLOCK_OPEN') {
                 this.currentIndex++;
-                block.properties = this.parseProperties(obj);
-                return block;
+                block.properties = this.parseProperties(root, block);
             }
+
             this.currentIndex++;
+            return block;
         }
-        return null;
+        
+        return block;
     }
 
-    parseProperties(obj) {
-        const properties = {};
+    parseProperties(root, block) {
+        const properties = [];
 
         while (this.currentIndex < this.tokens.length) {
             const token = this.tokens[this.currentIndex];
             const { type } = token;
+
+            if (token.type === 'SELECTOR') console.log("\n");
+            console.log("TOKEN: ",token);
             
             if (type === 'BLOCK_CLOSE') {
-                this.currentIndex++;
+                console.log("BLOCK-CLOSE: ", this.currentIndex, " of ", root.selector);
                 return properties;
             }
+            
+            if(token.type === 'SELECTOR') {
+                console.log("BEG SEL: ", this.tokens[this.currentIndex]); 
+
+                let nest = this.parseStatement();
+                //nest.parent = root;
+                block.nested.push(nest);
+                console.log("END SEL: ", this.currentIndex, " of ", nest.selector); 
+                console.log("\n"); 
+                continue;     
+            }
+
             if (['PROPERTY', 'JAZZ_KEYWORD'].includes(type)) {
-                const property = token.value;
+                const key = token.value;
                 this.currentIndex++; // Avança para o próximo token
                 const value = this.parseValue();
 
-                if(type === 'PROPERTY')
-                    properties[property] = value;
-                else if(type === 'JAZZ_KEYWORD')
-                    obj.jazz = value;
+                console.log({key, value}, " of ", root.selector );
 
-                    console.log(obj);
+                if(type === 'PROPERTY')
+                    properties.push({
+                        key,
+                        value
+                    });
+
+                else if(type === 'JAZZ_KEYWORD')
+                    root.jazz.push(value);
 
             } else {
                 this.currentIndex++; // Avança para o próximo token
             }
         }
-        return null;
+        return properties;
     }
 
     parseValue() {
@@ -211,7 +245,6 @@ class JazzCssParser {
             
             if (type === 'VALUE_OPEN') {
                 this.currentIndex++;
-                token = this.tokens[this.currentIndex];
             }
             if (type === 'VALUE_CLOSE' && !blockOpen) {
                 this.currentIndex++;

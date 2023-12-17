@@ -1,0 +1,93 @@
+[
+    {
+        "selector": ".myElement:mousemove",
+        "jazz": [
+            "{set x = this.event.clientX + \"px\";set y = this.event.clientY + \"px\";clog(\"Mouse hovering: \"+this.element.tagName+\" in x: \"+x+\", y: \"+y+\"}\");// does console.log}"
+        ],
+        "properties": [
+            {
+                "key": "border",
+                "value": "20px solid green"
+            },
+            {
+                "key": "background",
+                "value": "radial-gradient(50% at var(--x) var(--y), red, blue)"
+            }
+        ],
+        "nested": [
+            {
+                "selector": ".test",
+                "jazz": [],
+                "properties": [
+                    {
+                        "key": "color",
+                        "value": "yellow"
+                    }
+                ],
+                "nested": [
+                    {
+                        "selector": ".google",
+                        "jazz": [],
+                        "properties": [
+                            {
+                                "key": "background",
+                                "value": "red"
+                            }
+                        ],
+                        "nested": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "selector": ".classsel",
+        "jazz": [],
+        "properties": [
+            {
+                "key": "border",
+                "value": "2px dotted grey"
+            },
+            {
+                "key": "background",
+                "value": "purple"
+            }
+        ],
+        "nested": [
+            {
+                "selector": ".pip",
+                "jazz": [],
+                "properties": [
+                    {
+                        "key": "background",
+                        "value": "black"
+                    }
+                ],
+                "nested": [
+                    {
+                        "selector": "div:hover",
+                        "jazz": [],
+                        "properties": [
+                            {
+                                "key": "backgroung",
+                                "value": "blue"
+                            }
+                        ],
+                        "nested": []
+                    },
+                    {
+                        "selector": "p",
+                        "jazz": [],
+                        "properties": [
+                            {
+                                "key": "border",
+                                "value": "red solid 20px"
+                            }
+                        ],
+                        "nested": []
+                    }
+                ]
+            }
+        ]
+    }
+]
