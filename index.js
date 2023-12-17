@@ -3,6 +3,9 @@ const jazz = require("./jazz");
 /* 
     do JAZZ lexing
     do selector lexing
+
+    JAZZ color: #ff5a8f
+    from color-mix(in lch, #f0db4f, #2862e9)
 */
 
 const jazzCode = `
