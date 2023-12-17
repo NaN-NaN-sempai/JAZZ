@@ -65,6 +65,13 @@ Outputs JS & CSS:
 
         console.log("Mouse hovering: " + element.tagName + " in x: " + x + ", y: " + y);
     });
+
+    element.addEventListener("mouseenter", () => {
+        element.classList.add("jazz-4565635414123");
+    });
+    element.addEventListener("mouseout", () => {
+        element.classList.remove("jazz-4565635414123");
+    });
 });
 ```
 
