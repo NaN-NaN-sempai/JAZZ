@@ -31,3 +31,27 @@ for(i in sel.children) {
         background: js{randomColor()};
     }
 }
+
+
+
+
+
+.myElement:mousemove {
+    let posX = Event.clientX;
+    let posY = Event.clientY;
+    this.set("--posX", posX+"px");
+    this.set("--posY", posY+"px");
+
+    clog(`Mouse in x: ${posX}, y: ${posY}`); // does console.log
+
+    background: radial-gradient(50% at var(--posX) var(--posX), red, blue);
+} 
+
+.myElement:mousemove {
+    set x = this.event.clientX + "px";
+    set y = this.event.clientY + "px";
+
+    clog(`Mouse hovering: ${this.element.tagName} in x: ${posX}, y: ${posY}`); // does console.log
+
+    background: radial-gradient(50% at var(--x) var(--y), red, blue);
+}
