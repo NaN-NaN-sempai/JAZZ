@@ -1,73 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        * {
-            background-color: black;
-            color: white;
-        }
-    </style>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/themes/prism.min.css" rel="stylesheet" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/prism.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/components/prism-javascript.min.js"></script>
+
+
+	<style>
+		body {
+			background-color: black;
+			color: white;
+			display: flex;
+			flex-direction: column;
+			text-align: center;
+			max-height: 100vh;
+			padding: 0;
+			margin: 0;
+
+			gap: 5px;
+
+			& * {
+				margin: 0;
+				padding: 0;
+			}
+		}
+
+		pre {
+			display: flex;
+			flex-direction: row;
+			gap: 10px;
+			margin: 0 !important;
+
+			& code {
+				flex: 1;
+				overflow-x: auto;
+				border: 5px solid black;
+				border-radius: 5px;
+				padding-inline: 15px;
+				padding-block: 10px;
+				max-height: 100%;
+				max-width: 100%;
+			}
+		}
+	</style>
+
 </head>
+
 <body>
-  <h1>JAZZ WIP</h1>
-  <h3>CHECK OUT THE CONSOLE</h3>
+	<h1>JAZZ - WIP</h1>
+
+	<h2>CSS simple code</h2>
+	<pre>
+		<code id="input" class="language-css"></code>
+		<code id="output" class="language-javascript"></code>
+	</pre>
 </body>
 
 <script src="./index.js"></script>
 
 <script>
-    console.log(Jazz.structure(Jazz.tokenize(`
-    #parent1 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	const code = `#parent1 {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 #parent2 {
-  display: flex;
+	display: flex;
 }
 #child2 {
-  margin: auto;
+	margin: auto;
 }
 
 #parent3 {
-  display: grid;
-  place-items: center;
+	display: grid;
+	place-items: center;
 }
 
 #child4 {
-  /* just center horizontally */
-  margin: auto;
+	/* just center horizontally */
+	margin: auto;
 }
 
 #parent5 {
-  /* for inline items, text-align: center centers horizontally and setting the line-height to the height of the container centers vertically */
-  /* play around with both of these! */
-  text-align: center;
-  line-height: 100px;
+	/* for inline items, text-align: center centers horizontally and setting the line-height to the height of the container centers vertically */
+	/* play around with both of these! */
+	text-align: center;
+	line-height: 100px;
 }
 
 .parent {
-  width: 200px;
-  border: 2px solid purple;
-  height: 100px;
-  margin: 2em;
+	width: 200px;
+	border: 2px solid purple;
+	height: 100px;
+	margin: 2em;
 }
 
 .child {
-  width: 120px;
-  font-size: .8rem;
-  text-align: center;
-  border: 2px solid green;
-  height: 50px;
-  padding: .5em;
-  box-sizing: border-box;
-}
+	width: 120px;
+	font-size: .8rem;
+	text-align: center;
+	border: 2px solid green;
+	height: 50px;
+	padding: .5em;
+	box-sizing: border-box;
+}`;
 
+	document.getElementById("input").innerHTML = `/* INPUT */\n\n${code} `;
 
-    `)))
+	const actions = Jazz.structure(Jazz.tokenize(code));
+
+	document.getElementById("output").innerHTML = `/* OUTPUT - going through tokenize then structure */\n\n${JSON.stringify(actions, null, 2)}`;
+
+	console.log()
 </script>
+
 </html>
