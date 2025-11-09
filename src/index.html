@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            background-color: black;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+  <h1>JAZZ WIP</h1>
+  <h3>CHECK OUT THE CONSOLE</h3>
+</body>
+
+<script src="./index.js"></script>
+
+<script>
+    console.log(Jazz.structure(Jazz.tokenize(`
+    #parent1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#parent2 {
+  display: flex;
+}
+#child2 {
+  margin: auto;
+}
+
+#parent3 {
+  display: grid;
+  place-items: center;
+}
+
+#child4 {
+  /* just center horizontally */
+  margin: auto;
+}
+
+#parent5 {
+  /* for inline items, text-align: center centers horizontally and setting the line-height to the height of the container centers vertically */
+  /* play around with both of these! */
+  text-align: center;
+  line-height: 100px;
+}
+
+.parent {
+  width: 200px;
+  border: 2px solid purple;
+  height: 100px;
+  margin: 2em;
+}
+
+.child {
+  width: 120px;
+  font-size: .8rem;
+  text-align: center;
+  border: 2px solid green;
+  height: 50px;
+  padding: .5em;
+  box-sizing: border-box;
+}
+
+
+    `)))
+</script>
+</html>
