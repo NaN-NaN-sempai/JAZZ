@@ -1,5 +1,6 @@
 {
   "dependencies": {
     "circular-json": "^0.5.9"
-  }
+  },
+  "type": "module"
 }

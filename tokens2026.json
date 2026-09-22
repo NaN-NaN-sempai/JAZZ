@@ -1,0 +1,211 @@
+{
+    "type": "Root",
+    "body": [
+        {
+            "isJazzNode": true,
+            "selector": [
+                {
+                    "type": "special",
+                    "value": "."
+                },
+                {
+                    "type": "word",
+                    "value": "test"
+                }
+            ],
+            "data": [
+                {
+                    "isJazzCode": true,
+                    "data": [
+                        {
+                            "type": "word",
+                            "value": "console"
+                        },
+                        {
+                            "type": "special",
+                            "value": "."
+                        },
+                        {
+                            "type": "word",
+                            "value": "log"
+                        },
+                        {
+                            "type": "special",
+                            "value": "("
+                        },
+                        {
+                            "type": "word",
+                            "value": "this"
+                        },
+                        {
+                            "type": "special",
+                            "value": ")"
+                        },
+                        {
+                            "type": "special",
+                            "value": ";"
+                        }
+                    ]
+                },
+                {
+                    "isCssProperty": true,
+                    "name": "color",
+                    "value": [
+                        {
+                            "type": "whitespace",
+                            "value": " "
+                        },
+                        {
+                            "type": "word",
+                            "value": "red"
+                        }
+                    ]
+                },
+                {
+                    "isCssProperty": true,
+                    "name": "pointer-events",
+                    "value": [
+                        {
+                            "type": "whitespace",
+                            "value": " "
+                        },
+                        {
+                            "type": "word",
+                            "value": "none"
+                        }
+                    ]
+                },
+                {
+                    "isJazzCode": true,
+                    "data": [
+                        {
+                            "type": "word",
+                            "value": "for"
+                        },
+                        {
+                            "type": "special",
+                            "value": "("
+                        },
+                        {
+                            "type": "word",
+                            "value": "const"
+                        },
+                        {
+                            "type": "word",
+                            "value": "index"
+                        },
+                        {
+                            "type": "word",
+                            "value": "in"
+                        },
+                        {
+                            "type": "word",
+                            "value": "this"
+                        },
+                        {
+                            "type": "special",
+                            "value": "."
+                        },
+                        {
+                            "type": "word",
+                            "value": "children"
+                        },
+                        {
+                            "type": "special",
+                            "value": ")"
+                        },
+                        {
+                            "type": "special",
+                            "value": "{"
+                        },
+                        {
+                            "type": "word",
+                            "value": "console"
+                        },
+                        {
+                            "type": "special",
+                            "value": "."
+                        },
+                        {
+                            "type": "word",
+                            "value": "log"
+                        },
+                        {
+                            "type": "special",
+                            "value": "("
+                        },
+                        {
+                            "type": "word",
+                            "value": "index"
+                        },
+                        {
+                            "type": "unknown",
+                            "value": ","
+                        },
+                        {
+                            "type": "word",
+                            "value": "this"
+                        },
+                        {
+                            "type": "special",
+                            "value": "."
+                        },
+                        {
+                            "type": "word",
+                            "value": "children"
+                        },
+                        {
+                            "type": "unknown",
+                            "value": "["
+                        },
+                        {
+                            "type": "word",
+                            "value": "index"
+                        },
+                        {
+                            "type": "unknown",
+                            "value": "]"
+                        },
+                        {
+                            "type": "special",
+                            "value": ")"
+                        },
+                        {
+                            "type": "special",
+                            "value": ";"
+                        },
+                        {
+                            "type": "special",
+                            "value": "}"
+                        }
+                    ]
+                },
+                {
+                    "isJazzNode": true,
+                    "selector": [
+                        {
+                            "type": "word",
+                            "value": "h1"
+                        }
+                    ],
+                    "data": [
+                        {
+                            "isCssProperty": true,
+                            "name": "background",
+                            "value": [
+                                {
+                                    "type": "whitespace",
+                                    "value": " "
+                                },
+                                {
+                                    "type": "word",
+                                    "value": "green"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
